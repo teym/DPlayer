@@ -41,14 +41,15 @@ function initPlayers () {
         container: document.getElementById('dplayer-container'),
         preload: 'none',
         screenshot: false,
+        subtitle: false,
         video: {
             url: 'http://static.smartisanos.cn/common/video/t1-ui.mp4',
             pic: 'http://static.smartisanos.cn/pr/img/video/video_03_cc87ce5bdb.jpg',
             thumbnails: 'http://static.smartisanos.cn/pr/img/video/video_03_cc87ce5bdb.jpg'
         },
-        subtitle: {
-            url: 'subtitle test'
-        },
+        // subtitle: {
+        //     url: 'subtitle test'
+        // },
         danmaku: {
             id: '9E2E3368B56CDBB4',
             api: 'https://api.prprpr.me/dplayer/'
@@ -59,14 +60,15 @@ function initPlayers () {
         container: document.getElementById('dplayer1'),
         preload: 'none',
         screenshot: false,
+        subtitle: false,
         video: {
             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
             pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
             thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
         },
-        subtitle: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.vtt'
-        },
+        // subtitle: {
+        //     url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.vtt'
+        // },
         danmaku: {
             id: '9E2E3368B56CDBB4',
             api: 'https://api.prprpr.me/dplayer/',
@@ -82,6 +84,7 @@ function initPlayers () {
         theme: '#FADFA3',
         loop: true,
         screenshot: false,
+        subtitle: false,
         hotkey: true,
         // logo: 'https://i.loli.net/2019/06/06/5cf8c5d94521136430.png',
         volume: 0.2,

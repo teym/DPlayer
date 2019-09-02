@@ -353,6 +353,9 @@
             cursor: pointer;
             height: 100%;
             &:hover {
+                .dplayer-volume-bar-wrap {
+                    display: inline-block;
+                }
                 .dplayer-volume-bar-wrap .dplayer-volume-bar {
                     width: 45px;
                 }
@@ -369,7 +372,7 @@
                 }
             }
             .dplayer-volume-bar-wrap {
-                display: inline-block;
+                display: none;
                 margin: 0 10px 0 -5px;
                 vertical-align: middle;
                 height: 100%;
