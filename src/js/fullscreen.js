@@ -125,7 +125,17 @@ class FullScreen {
         }
     }
 
-    toggle (type = 'browser') {
+    detect() {
+        return this.player.container.requestFullscreen || 
+        this.player.container.mozRequestFullScreen || 
+        this.player.container.webkitRequestFullscreen ||
+        this.player.video.webkitEnterFullscreen || 
+        this.player.video.webkitEnterFullScreen ||
+        this.player.container.msRequestFullscreen;
+    }
+
+    toggle () {
+        const type = this.detect() ? 'browser' : 'web';
         if (this.isFullScreen(type)) {
             this.cancel(type);
         }
