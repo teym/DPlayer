@@ -137,25 +137,11 @@
                         <span class="dplayer-label">{{ tran('Speed') }}</span>
                         <div class="dplayer-toggle">{{@ icons.right }}</div>
                     </div>
-                    <div class="dplayer-setting-item dplayer-setting-loop">
-                        <span class="dplayer-label">{{ tran('Loop') }}</span>
-                        <div class="dplayer-toggle">
-                            <input class="dplayer-toggle-setting-input" type="checkbox" name="dplayer-toggle">
-                            <label for="dplayer-toggle"></label>
-                        </div>
-                    </div>
                     <div class="dplayer-setting-item dplayer-setting-showdan">
                         <span class="dplayer-label">{{ tran('Show danmaku') }}</span>
                         <div class="dplayer-toggle">
                             <input class="dplayer-showdan-setting-input" type="checkbox" name="dplayer-toggle-dan">
                             <label for="dplayer-toggle-dan"></label>
-                        </div>
-                    </div>
-                    <div class="dplayer-setting-item dplayer-setting-danunlimit">
-                        <span class="dplayer-label">{{ tran('Unlimited danmaku') }}</span>
-                        <div class="dplayer-toggle">
-                            <input class="dplayer-danunlimit-setting-input" type="checkbox" name="dplayer-toggle-danunlimit">
-                            <label for="dplayer-toggle-danunlimit"></label>
                         </div>
                     </div>
                     <div class="dplayer-setting-item dplayer-setting-danmaku">

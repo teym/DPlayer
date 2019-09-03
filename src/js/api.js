@@ -20,18 +20,7 @@ export default {
     read: (options) => {
         axios.get(options.url).
             then((response) => {
-                const data = response.data;
-                if (!data || data.code !== 0) {
-                    options.error && options.error(data && data.msg);
-                    return;
-                }
-                options.success && options.success(data.data.map((item) => ({
-                    time: item[0],
-                    type: item[1],
-                    color: item[2],
-                    author: item[3],
-                    text: item[4]
-                })));
+                options.success && options.success(response.data);
             }).
             catch((e) => {
                 console.error(e);

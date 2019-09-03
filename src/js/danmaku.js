@@ -20,6 +20,7 @@ class Danmaku {
         const onLoad = (array) => {
             this.danma.load(array.map((i) => parser.parseOne(i)));
             this.events && this.events.trigger('danmaku_load_end');
+            this.options.callback && this.options.callback();
         }
 
         this.options.apiBackend.read({

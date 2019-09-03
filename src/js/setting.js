@@ -12,18 +12,18 @@ class Setting {
         });
 
         // loop
-        this.loop = this.player.options.loop;
-        this.player.template.loopToggle.checked = this.loop;
-        this.player.template.loop.addEventListener('click', () => {
-            this.player.template.loopToggle.checked = !this.player.template.loopToggle.checked;
-            if (this.player.template.loopToggle.checked) {
-                this.loop = true;
-            }
-            else {
-                this.loop = false;
-            }
-            this.hide();
-        });
+        // this.loop = this.player.options.loop;
+        // this.player.template.loopToggle.checked = this.loop;
+        // this.player.template.loop.addEventListener('click', () => {
+        //     this.player.template.loopToggle.checked = !this.player.template.loopToggle.checked;
+        //     if (this.player.template.loopToggle.checked) {
+        //         this.loop = true;
+        //     }
+        //     else {
+        //         this.loop = false;
+        //     }
+        //     this.hide();
+        // });
 
         // show danmaku
         this.showDanmaku = this.player.user.get('danmaku');
@@ -46,21 +46,21 @@ class Setting {
         });
 
         // unlimit danmaku
-        this.unlimitDanmaku = this.player.user.get('unlimited');
-        this.player.template.unlimitDanmakuToggle.checked = this.unlimitDanmaku;
-        this.player.template.unlimitDanmaku.addEventListener('click', () => {
-            this.player.template.unlimitDanmakuToggle.checked = !this.player.template.unlimitDanmakuToggle.checked;
-            if (this.player.template.unlimitDanmakuToggle.checked) {
-                this.unlimitDanmaku = true;
-                this.player.danmaku.unlimit(true);
-            }
-            else {
-                this.unlimitDanmaku = false;
-                this.player.danmaku.unlimit(false);
-            }
-            this.player.user.set('unlimited', this.unlimitDanmaku ? 1 : 0);
-            this.hide();
-        });
+        // this.unlimitDanmaku = this.player.user.get('unlimited');
+        // this.player.template.unlimitDanmakuToggle.checked = this.unlimitDanmaku;
+        // this.player.template.unlimitDanmaku.addEventListener('click', () => {
+        //     this.player.template.unlimitDanmakuToggle.checked = !this.player.template.unlimitDanmakuToggle.checked;
+        //     if (this.player.template.unlimitDanmakuToggle.checked) {
+        //         this.unlimitDanmaku = true;
+        //         this.player.danmaku.unlimit(true);
+        //     }
+        //     else {
+        //         this.unlimitDanmaku = false;
+        //         this.player.danmaku.unlimit(false);
+        //     }
+        //     this.player.user.set('unlimited', this.unlimitDanmaku ? 1 : 0);
+        //     this.hide();
+        // });
 
         // speed
         this.player.template.speed.addEventListener('click', () => {
