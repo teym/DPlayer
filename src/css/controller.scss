@@ -353,43 +353,54 @@
             cursor: pointer;
             height: 100%;
             &:hover {
-                .dplayer-volume-bar-wrap {
-                    display: inline-block;
+                .dplayer-volume-icon{
+                    opacity: 0;
                 }
-                .dplayer-volume-bar-wrap .dplayer-volume-bar {
-                    width: 45px;
+                .dplayer-volume-bar-wrap{
+                    opacity: 1;
                 }
-                .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb {
-                    transform: scale(1);
-                }
+                // .dplayer-volume-bar-wrap .dplayer-volume-bar {
+                //     width: 45px;
+                // }
+                // .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb {
+                //     transform: scale(1);
+                // }
             }
-            &.dplayer-volume-active {
-                .dplayer-volume-bar-wrap .dplayer-volume-bar {
-                    width: 45px;
-                }
-                .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb {
-                    transform: scale(1);
-                }
+            // &.dplayer-volume-active {
+            //     .dplayer-volume-bar-wrap .dplayer-volume-bar {
+            //         width: 45px;
+            //     }
+            //     .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb {
+            //         transform: scale(1);
+            //     }
+            // }
+            .dplayer-volume-icon{
+                transition: opacity 0.3s ease-in-out;
+                opacity: 1;
             }
             .dplayer-volume-bar-wrap {
-                display: none;
+                display: inline-block;
                 margin: 0 10px 0 -5px;
                 vertical-align: middle;
                 height: 100%;
+                position: absolute;
+                left: 0;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
                 .dplayer-volume-bar {
                     position: relative;
                     top: 17px;
-                    width: 0;
+                    width: 45px;
                     height: 3px;
                     background: #aaa;
-                    transition: all 0.3s ease-in-out;
+                    // transition: all 0.3s ease-in-out;
                     .dplayer-volume-bar-inner {
                         position: absolute;
                         bottom: 0;
                         left: 0;
                         height: 100%;
-                        transition: all 0.1s ease;
-                        will-change: width;
+                        // transition: all 0.1s ease;
+                        // will-change: width;
                         .dplayer-thumb {
                             position: absolute;
                             top: 0;
@@ -400,8 +411,8 @@
                             width: 11px;
                             border-radius: 50%;
                             cursor: pointer;
-                            transition: all .3s ease-in-out;
-                            transform: scale(0);
+                            // transition: all .3s ease-in-out;
+                            transform: scale(1);
                         }
                     }
                 }

@@ -70,9 +70,8 @@ function initPlayers () {
         //     url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.vtt'
         // },
         danmaku: {
-            id: '9E2E3368B56CDBB4',
-            api: 'https://api.prprpr.me/dplayer/',
-            addition: ['https://cn-south-17-dplayer-49648867.oss.dogecdn.com/1678963.json']
+            id: '4fdf75d0-9b37-4c90-b001-2d0218c26081',
+            api: 'http://localhost:3000/api/data/danmus?i=eq.4fdf75d0-9b37-4c90-b001-2d0218c26081&select=i,s,c,h,f,d'
         }
     });
 
@@ -92,7 +91,6 @@ function initPlayers () {
         video: {
             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
             pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
-            thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg',
             type: 'auto'
         },
         // subtitle: {
@@ -105,11 +103,7 @@ function initPlayers () {
         danmaku: {
             id: '9E2E3368B56CDBB4',
             api: 'https://api.prprpr.me/dplayer/',
-            token: 'tokendemo',
-            maximum: 3000,
-            user: 'DIYgod',
-            bottom: '15%',
-            unlimited: true
+            token: 'tokendemo'
         },
         contextmenu: []
     });
