@@ -1,56 +1,69 @@
 .dplayer-danmaku {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    font-size: 22px;
-    color: #fff;
-    .dplayer-danmaku-item {
-        display: inline-block;
-        pointer-events: none;
-        user-select: none;
-        cursor: default;
-        white-space: nowrap;
-        text-shadow: .5px .5px .5px rgba(0, 0, 0, .5);
-        &--demo {
-            position: absolute;
-            visibility: hidden;
-        }
-    }
-    .dplayer-danmaku-right {
-        position: absolute;
-        right: 0;
-        transform: translateX(100%);
-        &.dplayer-danmaku-move {
-            will-change: transform;
-            animation: danmaku 5s linear;
-            animation-play-state: paused;
-        }
-    }
-    @keyframes danmaku {
-        from {
-            transform: translateX(100%);
-        }
-    }
-    .dplayer-danmaku-top,
-    .dplayer-danmaku-bottom {
-        position: absolute;
-        width: 100%;
-        text-align: center;
-        visibility: hidden;
-        &.dplayer-danmaku-move {
-            will-change: visibility;
-            animation: danmaku-center 4s linear;
-            animation-play-state: paused;
-        }
-    }
-    @keyframes danmaku-center {
-        from {
-            visibility: visible;
-        }
-        to {
-            visibility: visible;
-        }
+  border: 0;
+  bottom: 0;
+  display: block;
+  left: 0;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+  touch-callout: none;
+  transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  user-select: none;
+
+    .cmt {
+      color: #fff;
+      font-family: SimHei, SimSun, Heiti, "MS Mincho", "Meiryo", "Microsoft YaHei", monospace;
+      font-size: 25px;
+      letter-spacing: 0;
+      line-height: 100%;
+      margin: 0;
+      padding: 3px 0 0 0;
+      position: absolute;
+      text-decoration: none;
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      text-size-adjust: none;
+      transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+      transform-origin: 0% 0%;
+      white-space: pre;
+      word-break: keep-all;
+
+      &.no-shadow {
+        text-shadow: none;
+      }
+      &.reverse-shadow {
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+      }
+      &.css-optimize {
+        will-change: transform;
+      }
     }
 }
+
+/** Aliases for Chinese named fonts because they don't work on *nix **/
+@font-face {
+    font-family: "\9ED1\4F53";
+    src: local("SimHei");
+  }
+  
+  @font-face {
+    font-family: "\5B8B\4F53";
+    src: local("SimSun");
+  }
+  
+  @font-face {
+    font-family: "\534E\6587\6977\4F53";
+    src: local("SimKai");
+  }
+  
+  @font-face {
+    font-family: "\5E7C\5706";
+    src: local("YouYuan");
+  }
+  
+  @font-face {
+    font-family: "\5FAE\8F6F\96C5\9ED1";
+    src: local("Microsoft YaHei");
+  }

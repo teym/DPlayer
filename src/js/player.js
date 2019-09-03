@@ -97,14 +97,10 @@ class DPlayer {
                 borderColor: this.options.theme,
                 height: this.arrow ? 24 : 30,
                 time: () => this.video.currentTime,
-                unlimited: this.user.get('unlimited'),
                 api: {
                     id: this.options.danmaku.id,
                     address: this.options.danmaku.api,
-                    token: this.options.danmaku.token,
-                    maximum: this.options.danmaku.maximum,
-                    addition: this.options.danmaku.addition,
-                    user: this.options.danmaku.user,
+                    token: this.options.danmaku.token
                 },
                 events: this.events,
                 tran: (msg) => this.tran(msg),
@@ -234,7 +230,7 @@ class DPlayer {
     /**
      * Set volume
      */
-    volume (percentage, nostorage, nonotice) {
+    volume (percentage, nostorage, nonotice = true) {
         percentage = parseFloat(percentage);
         if (!isNaN(percentage)) {
             percentage = Math.max(percentage, 0);
@@ -300,9 +296,6 @@ class DPlayer {
                     id: danmakuAPI.id,
                     address: danmakuAPI.api,
                     token: danmakuAPI.token,
-                    maximum: danmakuAPI.maximum,
-                    addition: danmakuAPI.addition,
-                    user: danmakuAPI.user,
                 });
             }
         }
@@ -469,7 +462,7 @@ class DPlayer {
                 this.play();
             }
             if (this.danmaku) {
-                this.danmaku.danIndex = 0;
+                this.danmaku.pause();
             }
         });
 
@@ -490,6 +483,9 @@ class DPlayer {
             const currentTime = utils.secondToTime(this.video.currentTime);
             if (this.template.ptime.innerHTML !== currentTime) {
                 this.template.ptime.innerHTML = currentTime;
+            }
+            if(this.danmaku){
+                this.danmaku.frame();
             }
         });
 
@@ -523,6 +519,9 @@ class DPlayer {
 
         const paused = this.video.paused;
         this.video.pause();
+        if(this.danmaku){
+            this.danmaku.pause();
+        }
         const videoHTML = tplVideo({
             current: false,
             pic: null,
@@ -550,6 +549,9 @@ class DPlayer {
                 this.video.classList.add('dplayer-video-current');
                 if (!paused) {
                     this.video.play();
+                    if(this.danmaku){
+                        this.danmaku.play();
+                    }
                 }
                 this.prevVideo = null;
                 this.notice(`${this.tran('Switched to')} ${this.quality.name} ${this.tran('quality')}`);
@@ -587,6 +589,9 @@ class DPlayer {
 
     speed (rate) {
         this.video.playbackRate = rate;
+        if(this.danmaku){
+            this.danmaku.speed(rate);
+        }
     }
 
     destroy () {
