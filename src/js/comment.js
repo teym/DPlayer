@@ -84,7 +84,9 @@ class Comment {
         this.player.danmaku.send({
             text: this.player.template.commentInput.value,
             color: utils.color2Number(this.player.container.querySelector('.dplayer-comment-setting-color input:checked').value),
-            type: parseInt(this.player.container.querySelector('.dplayer-comment-setting-type input:checked').value),
+            mode: parseInt(this.player.container.querySelector('.dplayer-comment-setting-type input:checked').value),
+            size: parseInt(this.player.container.querySelector('.dplayer-comment-setting-size input:checked').value),
+            stime: this.player.time()
         }, () => {
             this.player.template.commentInput.value = '';
             this.hide();

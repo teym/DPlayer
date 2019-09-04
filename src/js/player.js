@@ -96,7 +96,7 @@ class DPlayer {
                 apiBackend: this.options.apiBackend,
                 borderColor: this.options.theme,
                 height: this.arrow ? 24 : 30,
-                time: () => Math.floor(this.video.currentTime * 1000),
+                time: () => this.time(),
                 api: {
                     id: this.options.danmaku.id,
                     address: this.options.danmaku.api,
@@ -138,6 +138,10 @@ class DPlayer {
         instances.push(this);
     }
 
+    time() {
+        return Math.floor(this.video.currentTime * 1000);
+    }
+
     /**
     * Seek video
     */
@@ -154,10 +158,6 @@ class DPlayer {
         }
 
         this.video.currentTime = time;
-
-        if (this.danmaku) {
-            this.danmaku.seek();
-        }
 
         this.bar.set('played', time / this.video.duration, 'width');
         this.template.ptime.innerHTML = utils.secondToTime(time);
@@ -185,7 +185,7 @@ class DPlayer {
         this.timer.enable('loading');
         this.container.classList.remove('dplayer-paused');
         this.container.classList.add('dplayer-playing');
-        
+
         if (this.options.mutex) {
             for (let i = 0; i < instances.length; i++) {
                 if (this !== instances[i]) {
@@ -272,6 +272,7 @@ class DPlayer {
      * attach event
      */
     on(name, callback) {
+        // this.events.on(name, callback(e));
         this.events.on(name, (e) => {
             console.log(name, e);
             callback(e);
@@ -439,6 +440,13 @@ class DPlayer {
                 this.template.dtime.innerHTML = utils.secondToTime(video.duration);
             }
         });
+        this.on('loadedmetadata', () => {
+            setTimeout(() => {
+                if (this.danmaku) {
+                    this.danmaku.resize({ width: this.video.videoWidth, height: this.video.videoHeight });
+                }
+            }, 16);
+        })
 
         // show video loaded bar: to inform interested parties of progress downloading the media
         this.on('progress', () => {
@@ -474,6 +482,8 @@ class DPlayer {
             if (this.paused) {
                 this.play();
             }
+        });
+        this.on('playing', () => {
             if (this.danmaku) {
                 this.danmaku.play();
             }
@@ -499,9 +509,26 @@ class DPlayer {
             }
         });
 
+        this.on('seeking', () => {
+            // if (this.danmaku) {
+            //     this.danmaku.pause();
+            // }
+        });
+        this.on('seeked', () => {
+            if (this.danmaku) {
+                this.danmaku.seek();
+                this.danmaku.frame();
+            }
+        })
+
         this.on('waiting', () => {
             if (this.danmaku) {
                 this.danmaku.pause();
+            }
+        })
+        this.on('ratechange', () => {
+            if (this.danmaku) {
+                this.danmaku.rate(this.video.playbackRate);
             }
         })
 
@@ -595,7 +622,7 @@ class DPlayer {
 
     resize() {
         if (this.danmaku) {
-            this.danmaku.resize();
+            this.danmaku.resize({ width: this.video.videoWidth, height: this.video.videoHeight });
         }
         if (this.controller.thumbnails) {
             this.controller.thumbnails.resize(160, this.video.videoHeight / this.video.videoWidth * 160, this.template.barWrap.offsetWidth);
@@ -605,9 +632,6 @@ class DPlayer {
 
     speed(rate) {
         this.video.playbackRate = rate;
-        if (this.danmaku) {
-            this.danmaku.speed(rate);
-        }
     }
 
     destroy() {

@@ -186,7 +186,7 @@
                 left: 0;
                 box-shadow: 0 0 25px rgba(0, 0, 0, .3);
                 border-radius: 4px;
-                padding: 10px 10px 16px;
+                padding: 0 8px 8px 8px;
                 font-size: 14px;
                 width: 204px;
                 transition: all .3s ease-in-out;
@@ -203,41 +203,63 @@
                 .dplayer-comment-setting-title {
                     font-size: 13px;
                     color: #fff;
-                    line-height: 30px;
+                    line-height: 24px;
+                    margin: 0;
+                    padding: 0;
                 }
-                .dplayer-comment-setting-type {
+                .dplayer-comment-setting-type, .dplayer-comment-setting-size {
+                    margin-bottom: 4px;
                     font-size: 0;
                     .dplayer-comment-setting-title {
                         margin-bottom: 6px;
                     }
-                    label {
-                        &:nth-child(2) {
-                            span {
-                                border-radius: 4px 0 0 4px;
+                    div{
+                        margin-top: -1px;
+                        &:nth-of-type(1) {
+                            label {
+                                &:first-child {
+                                    span {
+                                        border-top-left-radius: 4px;
+                                    }
+                                }
+                                &:last-child {
+                                    span {
+                                        border-top-right-radius: 4px;
+                                    }
+                                }
                             }
                         }
-                        &:nth-child(4) {
-                            span {
-                                border-radius: 0 4px 4px 0;
+                        &:nth-last-of-type(1){
+                            label{
+                                &:first-child {
+                                    span {
+                                        border-bottom-left-radius: 4px;
+                                    }
+                                }
+                                &:last-child {
+                                    span {
+                                        border-bottom-right-radius: 4px;
+                                    }
+                                }
                             }
                         }
-                    }
-                    span {
-                        width: 33%;
-                        padding: 4px 6px;
-                        line-height: 16px;
-                        display: inline-block;
-                        font-size: 12px;
-                        color: #fff;
-                        border: 1px solid #fff;
-                        margin-right: -1px;
-                        box-sizing: border-box;
-                        text-align: center;
-                        cursor: pointer;
-                    }
-                    input:checked+span {
-                        background: #E4E4E6;
-                        color: #1c1c1c;
+                        span {
+                            width: 33%;
+                            padding: 4px 0;
+                            line-height: 16px;
+                            display: inline-block;
+                            font-size: 12px;
+                            color: #fff;
+                            border: 1px solid #fff;
+                            margin-right: -1px;
+                            box-sizing: border-box;
+                            text-align: center;
+                            cursor: pointer;
+                        }
+                        input:checked+span {
+                            background: #E4E4E6;
+                            color: #1c1c1c;
+                        }
                     }
                 }
                 .dplayer-comment-setting-color {

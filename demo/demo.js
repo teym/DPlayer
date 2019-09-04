@@ -2,7 +2,7 @@
 const stats = new Stats();
 stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild(stats.dom);
-function animate () {
+function animate() {
     stats.begin();
     // monitored code goes here
     stats.end();
@@ -14,7 +14,7 @@ requestAnimationFrame(animate);
 initPlayers();
 handleEvent();
 
-function handleEvent () {
+function handleEvent() {
     document.getElementById('dplayer-dialog').addEventListener('click', (e) => {
         const $clickDom = e.currentTarget;
         const isShowStatus = $clickDom.getAttribute('data-show');
@@ -35,7 +35,7 @@ function handleEvent () {
     });
 }
 
-function initPlayers () {
+function initPlayers() {
     // dplayer-float
     // window.dpFloat = new DPlayer({
     //     container: document.getElementById('dplayer-container'),
@@ -58,20 +58,25 @@ function initPlayers () {
     // dp1
     window.dp1 = new DPlayer({
         container: document.getElementById('dplayer1'),
-        preload: 'none',
+        preload: 'auto',
         screenshot: false,
         subtitle: false,
         video: {
             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
             pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
-            thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
+            // thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
         },
         // subtitle: {
         //     url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.vtt'
         // },
         danmaku: {
-            id: '5976651a-4beb-4792-8481-10e02d72f649',
-            api: 'http://localhost:3000/api/data/danmus?t=eq.5976651a-4beb-4792-8481-10e02d72f649&select=i,s,c,h,f,d'
+            id: '1a9102d1-4cf8-4d72-999c-20aa16433270',
+            api: {
+                pull: 'http://localhost:3000/api/data/danmus?t=eq.1a9102d1-4cf8-4d72-999c-20aa16433270&select=i,s,c,h,f,d',
+                push: 'http://localhost:3000/pubsub/1a9102d1-4cf8-4d72-999c-20aa16433270',
+                live: 'ws://localhost:3000/pubsub/1a9102d1-4cf8-4d72-999c-20aa16433270'
+            },
+            token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIiA6ICJ3ZWJ1c2VyIiwgInVzZXJfaWQiIDogIjc2ODhhMzhjLTVhN2ItNDU0Zi1iMzI0LTc3YjAzNDViODhhZSIsICJleHAiIDogMTU3MDE3ODczMH0.T3BNvv9zj0W-TzQWGbDadKWBiTBuL4xxJDjbrBnvGlg'
         }
     });
 
@@ -227,25 +232,25 @@ function initPlayers () {
     // });
 }
 
-function clearPlayers () {
+function clearPlayers() {
     for (let i = 0; i < 6; i++) {
         window['dp' + (i + 1)].pause();
         document.getElementById('dplayer' + (i + 1)).innerHTML = '';
     }
 }
 
-function switchDPlayer () {
+function switchDPlayer() {
     if (dp2.option.danmaku.id !== '5rGf5Y2X55qu6Z2p') {
         dp2.switchVideo({
             url: 'http://static.smartisanos.cn/common/video/t1-ui.mp4',
             pic: 'http://static.smartisanos.cn/pr/img/video/video_03_cc87ce5bdb.jpg',
             type: 'auto',
         }, {
-            id: '5rGf5Y2X55qu6Z2p',
-            api: 'https://api.prprpr.me/dplayer/',
-            maximum: 3000,
-            user: 'DIYgod'
-        });
+                id: '5rGf5Y2X55qu6Z2p',
+                api: 'https://api.prprpr.me/dplayer/',
+                maximum: 3000,
+                user: 'DIYgod'
+            });
     } else {
         dp2.switchVideo({
             url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
@@ -253,10 +258,10 @@ function switchDPlayer () {
             thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg',
             type: 'auto'
         }, {
-            id: '9E2E3368B56CDBB42',
-            api: 'https://api.prprpr.me/dplayer/',
-            maximum: 3000,
-            user: 'DIYgod'
-        });
+                id: '9E2E3368B56CDBB42',
+                api: 'https://api.prprpr.me/dplayer/',
+                maximum: 3000,
+                user: 'DIYgod'
+            });
     }
 }

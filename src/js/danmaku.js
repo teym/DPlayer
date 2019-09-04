@@ -48,9 +48,10 @@ class Danmaku {
         this.options.apiBackend.send({
             url: this.options.api.address,
             id: this.options.api.id,
+            token: this.options.api.token,
             data: Object.assign(
                 { t: this.options.api.id, h: null, f: danma.stime },
-                format.encode(danmu)
+                parser.encode(danma)
             ),
             success: callback,
             error: (msg) => {
@@ -60,7 +61,7 @@ class Danmaku {
         danma.stime += 200;
         this.danma.send(danma);
 
-        this.events && this.events.trigger('danmaku_send', danmakuData);
+        this.events && this.events.trigger('danmaku_send', danma);
     }
 
     frame() {
@@ -70,7 +71,6 @@ class Danmaku {
     opacity(percentage) {
         if (percentage !== undefined) {
             this.danma.options.global.opacity = percentage;
-
             this.events && this.events.trigger('danmaku_opacity', this.danma.options.global.opacity);
         }
         return this.danma.options.global.opacity;
@@ -104,9 +104,20 @@ class Danmaku {
             replace(/\//g, '&#x2f;');
     }
 
-    resize() {
-        const danWidth = this.container.offsetWidth;
+    resize(video) {
+        const {width, height} = video;
+        const danWidth = this.container.parentNode.offsetWidth;
+        const danHeight = this.container.parentNode.offsetHeight;
+        const size = height > 720 ? 1080 : 720;
+        this.container.style.width = Math.floor(danWidth / danHeight * 720) + 'px';
+        this.container.style.height = size + 'px';
+        this.container.style.transform = 'scale('+ (danHeight / size).toFixed(4) +')';
         this.danma.setBounds();
+        console.log('resize',danWidth, danHeight, Math.floor(danWidth / danHeight * 720), size, (danHeight / size).toFixed(4));
+    }
+
+    rate(rate) {
+        this.danma.options.global.scale = (1 / rate).toFixed(4);
     }
 
     hide() {
