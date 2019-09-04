@@ -70,13 +70,13 @@ function initPlayers() {
         //     url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.vtt'
         // },
         danmaku: {
-            id: '1a9102d1-4cf8-4d72-999c-20aa16433270',
+            id: '269dbcd0-3851-46c5-9de7-43201efb1583',
             api: {
-                pull: 'http://localhost:3000/api/data/danmus?t=eq.1a9102d1-4cf8-4d72-999c-20aa16433270&select=i,s,c,h,f,d',
-                push: 'http://localhost:3000/pubsub/1a9102d1-4cf8-4d72-999c-20aa16433270',
-                live: 'ws://localhost:3000/pubsub/1a9102d1-4cf8-4d72-999c-20aa16433270'
+                pull: 'http://localhost:3000/api/data/danmus?t=eq.269dbcd0-3851-46c5-9de7-43201efb1583&select=i,s,c,h,f,d',
+                push: 'http://localhost:3000/pubsub/269dbcd0-3851-46c5-9de7-43201efb1583',
+                live: 'ws://localhost:3000/pubsub/269dbcd0-3851-46c5-9de7-43201efb1583'
             },
-            token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIiA6ICJ3ZWJ1c2VyIiwgInVzZXJfaWQiIDogIjc2ODhhMzhjLTVhN2ItNDU0Zi1iMzI0LTc3YjAzNDViODhhZSIsICJleHAiIDogMTU3MDE3ODczMH0.T3BNvv9zj0W-TzQWGbDadKWBiTBuL4xxJDjbrBnvGlg'
+            token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIiA6ICJ3ZWJ1c2VyIiwgInVzZXJfaWQiIDogIjY4ZmU1ZTNhLWNlZGYtNGJkOC1iMDllLTk5NzQ4MzU2ZmExMyIsICJleHAiIDogMTU3MDE4NTczOX0.g3sBuyS7zfqehy5UY2XiHrrBCFAtmkI8anoWsjNUk8s'
         }
     });
 

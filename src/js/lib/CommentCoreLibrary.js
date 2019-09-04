@@ -1086,7 +1086,7 @@ var AnchorCommentSpaceAllocator = (function (_super) {
     _super.prototype.add.call(this, comment)
     comment.x = (this._width - comment.width) / 2
   }
-  AnchorCommentSpaceAllocator.prototype.willCollide = function (a, b) {
+  AnchorCommentSpaceAllocator.prototype.willCollide = function (/*a, b*/) {
     return true
   }
   AnchorCommentSpaceAllocator.prototype.pathCheck = function (y, comment, pool) {
@@ -1120,7 +1120,7 @@ var CommentUtils;
       get: function () {
         return this._internalArray.slice(0)
       },
-      set: function (array) {
+      set: function (/*array*/) {
         throw new Error('Not permitted. Matrices are immutable.')
       },
       enumerable: true,

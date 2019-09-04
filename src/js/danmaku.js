@@ -1,6 +1,6 @@
-import utils from './utils';
 import { CommentManager } from './lib/CommentCoreLibrary';
 import { DanmuFormat } from './lib/CommentParser';
+import NchanSubscriber from './lib/NchanSubscriber';
 
 const parser = new DanmuFormat.JSONParser();
 
@@ -9,6 +9,7 @@ class Danmaku {
         this.options = options;
         this.container = this.options.container;
         this.events = this.options.events;
+        this.chan = null;
         this.danma = new CommentManager(this.container);
         this.danma.options.global.opacity = this.options.opacity;
         this.danma.init('css');
@@ -34,6 +35,29 @@ class Danmaku {
                 this.options.error(msg);
             },
         });
+        this.chan = new NchanSubscriber(this.options.api.address.live, {
+            subscriber: 'websocket',
+            reconnect: 'persist'
+        });
+        this.chan.reconnect = true;
+        this.chan.reconnectTimeout = 5;
+        this.chan.on(
+            'message',
+            (message) => {
+                console.log('on recv', message);
+                
+                const msg = JSON.parse(message).map(function (j) {
+                    return parser.parseOne(j)
+                })[0];
+                if (msg.stime < 0) {
+                    msg.stime = this.options.time() + 100;
+                    this.danma.send(msg);
+                } else {
+                    this.danma.insert(msg);
+                }
+            }
+        )
+        this.chan.start()
     }
 
     reload(newAPI) {
@@ -45,21 +69,28 @@ class Danmaku {
 
     send(dan, callback) {
         const danma = parser.buildBase(dan);
+        const live = danma.mode <= 0;
+        if (live) {
+            danma.mode = 1;
+        }
         this.options.apiBackend.send({
             url: this.options.api.address,
             id: this.options.api.id,
             token: this.options.api.token,
             data: Object.assign(
-                { t: this.options.api.id, h: null, f: danma.stime },
-                parser.encode(danma)
+                { h: null },
+                parser.encode(danma),
+                { t: this.options.api.id, f: live ? -1 : danma.stime }
             ),
             success: callback,
             error: (msg) => {
                 this.options.error(msg || this.options.tran('Danmaku send failed'));
             },
         });
-        danma.stime += 200;
-        this.danma.send(danma);
+        if (!live) {
+            danma.stime += 200;
+            this.danma.send(danma);
+        }
 
         this.events && this.events.trigger('danmaku_send', danma);
     }
@@ -90,7 +121,7 @@ class Danmaku {
 
     clear() {
         this.danma.clear();
-
+        this.chan && this.chan.stop();
         this.events && this.events.trigger('danmaku_clear');
     }
 
@@ -105,15 +136,15 @@ class Danmaku {
     }
 
     resize(video) {
-        const {width, height} = video;
+        const { height } = video;
         const danWidth = this.container.parentNode.offsetWidth;
         const danHeight = this.container.parentNode.offsetHeight;
         const size = height > 720 ? 1080 : 720;
         this.container.style.width = Math.floor(danWidth / danHeight * 720) + 'px';
         this.container.style.height = size + 'px';
-        this.container.style.transform = 'scale('+ (danHeight / size).toFixed(4) +')';
+        this.container.style.transform = 'scale(' + (danHeight / size).toFixed(4) + ')';
         this.danma.setBounds();
-        console.log('resize',danWidth, danHeight, Math.floor(danWidth / danHeight * 720), size, (danHeight / size).toFixed(4));
+        console.log('resize', danWidth, danHeight, Math.floor(danWidth / danHeight * 720), size, (danHeight / size).toFixed(4));
     }
 
     rate(rate) {
